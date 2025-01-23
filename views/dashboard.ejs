@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .left-section {
+            width: 50%;
+            background-color: #f5f5f5;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-section {
+            width: 50%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        .domain-container {
+            width: 80%;
+        }
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 200px;
+            padding: 1rem;
+            margin: 0.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #0066cc;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0052a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-section">
+        <div class="domain-container">
+            <label for="domain">Choose a domain:</label>
+            <select name="domain" id="domain">
+                <option value="WebDev">WebDev</option>
+                <option value="AI/ML">AI/ML</option>
+                <option value="Blockchain">Blockchain</option>
+                <option value="Social">Social</option>
+            </select>
+        </div>
+    </div>
+    <div class="right-section">
+        <!-- Form for creating a team -->
+        <form action="/Create_team" method="get">
+            <button type="submit">Create team</button>
+        </form>
+
+        <!-- Form for joining a team -->
+        <form action="/Join_team" method="post">
+            <button type="submit">Join team</button>
+        </form>
+    </div>
+
+    <script>
+        const domainSelect = document.getElementById("domain");
+    
+        domainSelect.addEventListener("change", () => {
+            const selectedDomain = domainSelect.value;
+    
+            fetch("/updateDomain", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ domain: selectedDomain }),
+            })
+            .then((response) => {
+                if (response.ok) {
+                    console.log("Domain updated successfully!");
+                } else {
+                    console.error("Failed to update domain.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

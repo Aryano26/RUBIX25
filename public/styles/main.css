@@ -1,0 +1,120 @@
+/* Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  background-color: #141414;
+  color: #fff;
+}
+
+/* Headers*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar .logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #F0F8FF;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.nav-links li a:hover {
+  color: #483D8B;
+  transition: 0.3s;
+}
+
+.nav-links .login a{
+  padding: 11px 9px;
+  border-radius: 3px;
+  background-color: #483D8B;
+}
+
+.hero {
+  background: url('https://assets.nflxext.com/ffe/siteui/vlv3/54de9f7c-d338-40cd-b99e-44d3d3d8d109/0581919b-4c8b-4aa7-8cd1-6b981f69c1d4/PK-en-20230130-popsignuptwoweeks-perspective_alpha_website_small.jpg') no-repeat center center/cover;
+  height: 80vh;
+  display: flex;
+  margin-left: 8%;
+  align-items: center;
+ 
+  color: #fff;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 5em;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  
+  font-size: 1.5em;
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+
+.hero-content button {
+  margin-left: 11px;
+  background-color: #483D8B;
+  color: #fff;
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 5003;
+  font-style: normal;
+  
+  border: none;
+  padding: 15px 30px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hero-content button:hover {
+  background-color: #4B0082;
+  transition: 0.3s;
+}
+
+
+.hack-grid {
+  padding: 40px;
+}
+
+.hack-grid h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.grid-item img {
+  width: 100%;
+  border-radius: 5px;
+}

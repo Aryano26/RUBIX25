@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            display: none;
+        }
+        .error {
+            color: red;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <form id="teamForm">
+        <div>
+            <label for="teamName">Team Name:</label>
+            <input type="text" id="teamName" name="teamName" required>
+        </div>
+        <div>
+            <label for="domain">Choose a domain:</label>
+            <select name="domain" id="domain">
+                <option value="WebDev">WebDev</option>
+                <option value="AI/ML">AI/ML</option>
+                <option value="Blockchain">Blockchain</option>
+                <option value="Social">Social</option>
+            </select>
+        </div>
+        <div id="errorMessage" class="error"></div>
+        <button type="submit">Create Team</button>
+    </form>
+    
+    <div id="result" class="result" style="display: none;">
+        <h2>Team Created Successfully!</h2>
+        <p>Your team code: <strong id="teamCode"></strong></p>
+    </div>
+    
+    <script>
+        document.getElementById('teamForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const errorMessageEl = document.getElementById('errorMessage');
+            errorMessageEl.textContent = '';
+
+            const teamName = document.getElementById('teamName').value;
+            const domain = document.getElementById('domain').value;
+
+            fetch('/Create_team', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ teamName, domain }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(text);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.teamCode) {
+                    document.getElementById('result').style.display = 'block';
+                    document.getElementById('teamCode').textContent = data.teamCode;
+                    this.reset();
+                } else {
+                    throw new Error("Failed to create team");
+                }
+            })
+            .catch(error => {
+                errorMessageEl.textContent = error.message || "Failed to create team";
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
